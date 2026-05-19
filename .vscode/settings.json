@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Gambling-Club.slnx",
+    "dotnet.defaultSolution": "Gambling Club.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
