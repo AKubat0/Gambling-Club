@@ -225,14 +225,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f35886d47719f4e853281733b9a321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementScript
-  moveSpeed: 5
-  jumpForce: 3
-  groundCheck: {fileID: 5553904200597826310}
-  groundCheckRadius: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  maxSpeed: 5
+  acceleration: 15
+  jumpHeight: 1
   controller: {fileID: 9121043690905918518}
+  gravityScale: 3
+  verticalVelocity: 0
 --- !u!1 &7947209683645116178
 GameObject:
   m_ObjectHideFlags: 0

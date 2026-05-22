@@ -6,23 +6,19 @@ public class PlayerMovementScript : MonoBehaviour
 {
     [SerializeField] private float maxSpeed = 5f;
     [SerializeField] private float acceleration = 15f;
-    [SerializeField] private float jumpForce = 3f;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundCheckRadius = 0.2f;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private CharacterController controller;
 
+    [Header("Physics Parameters")]
+    [SerializeField] private float gravityScale = 3f;
     public Vector3 currentVelocity { get; private set; }
+    public float verticalVelocity = 0f;
     public float currentSpeed { get; private set;}
+    public bool isGrounded => controller.isGrounded;
 
-
-    private bool jumpRequested;
 
     void Update()
     {
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
-            jumpRequested = true;
-
         ApplyMovement();
         ApplyJump();
     }
@@ -45,7 +41,16 @@ public class PlayerMovementScript : MonoBehaviour
             currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, acceleration * Time.deltaTime);
         }
 
-        float verticalVelocity = Physics.gravity.y * 20f * Time.deltaTime;
+        if (isGrounded  && verticalVelocity <= 0.01f)
+        {
+            verticalVelocity = -3f;
+        }
+        else
+        {
+            verticalVelocity += Physics.gravity.y * gravityScale * Time.deltaTime;
+        }
+
+
 
         Vector3 fullVelocity = new Vector3(currentVelocity.x, verticalVelocity, currentVelocity.z);
 
@@ -54,17 +59,11 @@ public class PlayerMovementScript : MonoBehaviour
 
     void ApplyJump()
     {
-        if (!jumpRequested) return;
+        if (!isGrounded) return;
 
-        controller.Move(Vector3.up * jumpForce * Time.deltaTime);
+        if (!Input.GetButtonDown("Jump")) return;
 
-        Debug.Log("Jumping with force: " + jumpForce);
-        
-        jumpRequested = false;
+        verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y * gravityScale);
     }
 
-    private bool IsGrounded()
-    {
-        return Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
-    }
 }
