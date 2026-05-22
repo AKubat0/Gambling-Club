@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6981450277930808994}
   - component: {fileID: 2000680429871828030}
   - component: {fileID: 4849664409293745656}
+  - component: {fileID: 7863374623528760377}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -150,8 +151,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64b01a39dc858e47a78f2c9b3f60824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLookScript
-  mouseSensitivity: 100
+  mouseSensitivity: 200
   playerBody: {fileID: 3947738697101858532}
+--- !u!114 &7863374623528760377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163251435069535141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6394530474e6cd849adfc1b79ff89ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MouseLockControl
 --- !u!1 &3148177009866659107
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f35886d47719f4e853281733b9a321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementScript
-  maxSpeed: 5
+  maxSpeed: 4
   acceleration: 15
   jumpHeight: 1
   controller: {fileID: 9121043690905918518}
