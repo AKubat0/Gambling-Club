@@ -5,7 +5,14 @@ public class PlayerLookScript : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 100f;
     [SerializeField] private Transform playerBody;
 
+    [SerializeField] private Transform  playerModelHead;
+
     private float xRotation = 0f;
+
+    void Start()
+    {
+        transform.position = playerModelHead.position;
+    }
 
     void Update()
     {

@@ -16,6 +16,19 @@ public class PlayerMovementScript : MonoBehaviour
     public float currentSpeed { get; private set;}
     public bool isGrounded => controller.isGrounded;
 
+    private bool canJump = true;
+
+    [HideInInspector]
+    public enum MovementState
+    {
+        REGULAR,
+        BOXING
+    }
+
+    void Start()
+    {
+        setMovementState(MovementState.REGULAR);
+    }
 
     void Update()
     {
@@ -59,11 +72,30 @@ public class PlayerMovementScript : MonoBehaviour
 
     void ApplyJump()
     {
+        if (!canJump) return;
+
         if (!isGrounded) return;
 
         if (!Input.GetButtonDown("Jump")) return;
 
         verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y * gravityScale);
+    }
+
+    public void setMovementState(MovementState newState)
+    {
+        switch (newState)
+        {
+            case MovementState.REGULAR:
+                maxSpeed = 5f;
+                acceleration = 15f;
+                canJump = true;
+                break;
+            case MovementState.BOXING:
+                maxSpeed = 3f;
+                acceleration = 25f;
+                canJump = false;
+                break;
+        }
     }
 
 }
